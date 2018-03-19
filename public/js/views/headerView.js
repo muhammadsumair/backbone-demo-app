@@ -18,6 +18,7 @@ define([
         logout: function() {
             localStorage.removeItem("user");
             window.Router.navigate('#/login');
+            return false;
         }
     });
 

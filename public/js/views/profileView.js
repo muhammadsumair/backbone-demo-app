@@ -16,7 +16,7 @@ define([
 
         initialize: function() {
             var self = this;
-            self.limit = 10;
+            self.limit = 5;
             self.skip = 0;
             self.profiles = new ProfileCollection();
             var tableView = new TableView();
