@@ -38,8 +38,12 @@ define([
                 });
                 self.skip = self.skip + self.limit;
                 $('#loadMore').removeClass("hide");
+                $('.loader').addClass("hide");
             }
-            else $('#loadMore').addClass("hide");
+            else {
+                $('.loader').addClass("hide");
+                $('#loadMore').addClass("hide");
+            }
         },
 
         loadMore: function() {

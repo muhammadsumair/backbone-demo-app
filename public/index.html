@@ -38,9 +38,15 @@
         <div class="row">
             <div class="wrapper login">
                 <form class="form-signin" id="login-form">
-                    <h2 class="form-signin-heading">Login</h2>
-                    <input type="email" class="form-control" name="email" placeholder="Email" value="abc@gmail.com" required="" autofocus="" />
-                    <input type="password" class="form-control" name="password" placeholder="Password" value="abc" required=""/>
+                    <h2 class="form-signin-heading">User Login</h2>
+                    <div class="form-group">
+                        <label for="email"><b>Email</b></label>
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="abc@gmail.com" required="" autofocus="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" class="form-control" name="psw" placeholder="Password" value="abc" required=""/>
+                    </div>
                     <p class="error-msg hide"></p>
 
                     <button id="login-btn" class="btn btn-lg btn-primary btn-block" type="submit" value=''>Login</button>
@@ -81,6 +87,7 @@
         <thead>
         <tbody id="profiles"></tbody>
     </table>
+    <p class="text-center"><img class="loader" src="./images/giphy.gif" alt="Mountain View"></p>
     <button type="button" class="btn btn-default center-block hide" id="loadMore">Load More</button>
 </script>
 
