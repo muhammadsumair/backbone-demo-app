@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <meta http-equiv = "X-UA-Compatible" content = "IE = edge,chrome = 1">
+    <title>JSON data show using Backbone.js</title>
+    <link rel="stylesheet" type="text/css" href="./styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./styles/style.css">
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+    <div class="row" id="app"></div>
+</div>
+
+<script id="headerTemplate" type="text/template">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">BACKBONE PRACTICE</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#/list">List</a></li>
+                <li><a href="#/search">Search</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="" id="logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</script>
+
+<script id="loginTemplate" type="text/template">
+    <div class="container">
+        <div class="row">
+            <div class="wrapper login">
+                <form class="form-signin" id="login-form">
+                    <h2 class="form-signin-heading">Login</h2>
+                    <input type="email" class="form-control" name="email" placeholder="Email" value="abc@gmail.com" required="" autofocus="" />
+                    <input type="password" class="form-control" name="password" placeholder="Password" value="abc" required=""/>
+                    <p class="error-msg hide"></p>
+
+                    <button id="login-btn" class="btn btn-lg btn-primary btn-block" type="submit" value=''>Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="searchTemplate" type="text/template">
+    <div>
+        <input type="text" class="search" placeholder="Enter ID">
+        <button type="button" class="btn btn-default" id="onSearch">Search</button>
+    </div>
+
+    <div class="container record-container">
+        <div id="record" class="row hide">
+            <div class="labels col-xs-2">
+                <p>Id: </p>
+                <p>Name: </p>
+                <p>Title: </p>
+            </div>
+            <div id="insert" class="col-xs-10"></div>
+        </div>
+    </div>
+
+    <p id="notFound" class="hide">No Record found!</p>
+</script>
+
+<script id="tableTemplate" type="text/template">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Title</th>
+        </tr>
+        <thead>
+        <tbody id="profiles"></tbody>
+    </table>
+    <button type="button" class="btn btn-default center-block hide" id="loadMore">Load More</button>
+</script>
+
+<script id="template" type="text/template">
+    <tr>
+        <td><%= id %></td>
+        <td><%= name %></td>
+        <td><%= title %></td>
+    </tr>
+</script>
+
+<script src="./lib/require.js" type="text/javascript" data-main="./js/main.js"></script>
+
+</body>
+</html>
