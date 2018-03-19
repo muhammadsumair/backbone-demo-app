@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-var server = app.listen(port, function(err) {
+var server = app.listen(process.env.PORT || port, function(err) {
     if (err) {
         return console.log('something bad happened', err)
     }
