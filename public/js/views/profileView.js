@@ -48,6 +48,10 @@ define([
 
         loadMore: function() {
             this.render();
+        },
+
+        destroy: function() {
+            $(this.el).removeData().unbind();
         }
     });
 

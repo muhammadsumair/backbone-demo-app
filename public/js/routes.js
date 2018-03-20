@@ -15,12 +15,15 @@ define([
             '': 'search',
             'list': 'list'
         },
-        list: function(){
+        list: function() {
             var user = localStorage.getItem("user");
             if(!user) window.Router.navigate('#/login');
             else {
                 new HeaderView();
-                new ProfileView();
+                if(window.profiles) {
+                    window.profiles.destroy();
+                }
+                window.profiles = new ProfileView();
             }
         },
 
