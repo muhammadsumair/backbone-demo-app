@@ -16,7 +16,7 @@ app.post('/login', function(req, res) {
         if (err) return res.status(500).send();
         var users = JSON.parse(data);
         for(var i = 0; i < users.length; i++) {
-            if(users[i].email === req.body.email && users[i].password === req.body..password) {
+            if(users[i].email === req.body.email && users[i].password === req.body.password) {
                 return res.status(200).send({
                     user: users[i]
                 })
