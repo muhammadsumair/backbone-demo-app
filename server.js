@@ -26,6 +26,17 @@ app.post('/login', function(req, res) {
     });
 });
 
+app.get('/users/all/:skip/:limit', function(req, res) {
+    fs.readFile(path.join(__dirname + '/public/json/sample.json'), 'utf8', function (err, data) {
+        if (err) return res.status(500).send();
+        var limit = Number(req.params.limit) || 10;
+        var skip = Number(req.params.skip) || 0;
+        var sampleArray = JSON.parse(data);
+        sampleArray = sampleArray.slice(skip, skip + limit);
+        res.send(sampleArray);
+    });
+});
+
 app.get('/users/:id', function(req, res) {
     fs.readFile(path.join(__dirname + '/public/json/sample.json'), 'utf8', function (err, data) {
         if (err) return res.status(500).send();
@@ -35,14 +46,6 @@ app.get('/users/:id', function(req, res) {
         });
         if(collection.length) return res.send(collection);
         return res.status(404).send({message: 'Data not found'});
-    });
-});
-
-app.get('/users', function(req, res) {
-    fs.readFile(path.join(__dirname + '/public/json/sample.json'), 'utf8', function (err, data) {
-        if (err) return res.status(500).send();
-        var sampleArray = JSON.parse(data);
-        res.send(sampleArray);
     });
 });
 
