@@ -27,7 +27,7 @@ app.post('/login', function(req, res) {
 });
 
 app.get('/users/all/:skip/:limit', function(req, res) {
-    fs.readFile(path.join(__dirname + '/public/json/sample.json'), 'utf8', function (err, data) {
+    fs.readFile(path.join(__dirname + '/public/json/credentials.json'), 'utf8', function (err, data) {
         if (err) return res.status(500).send();
         var limit = Number(req.params.limit) || 10;
         var skip = Number(req.params.skip) || 0;
@@ -38,6 +38,29 @@ app.get('/users/all/:skip/:limit', function(req, res) {
 });
 
 app.get('/users/:id', function(req, res) {
+    fs.readFile(path.join(__dirname + '/public/json/credentials.json'), 'utf8', function (err, data) {
+        if (err) return res.status(500).send();
+        var sampleArray = JSON.parse(data);
+        var collection = sampleArray.filter(function(data) {
+            return data.id === req.params.id;
+        });
+        if(collection.length) return res.send(collection);
+        return res.status(404).send({message: 'Data not found'});
+    });
+});
+
+app.get('/employees/all/:skip/:limit', function(req, res) {
+    fs.readFile(path.join(__dirname + '/public/json/sample.json'), 'utf8', function (err, data) {
+        if (err) return res.status(500).send();
+        var limit = Number(req.params.limit) || 10;
+        var skip = Number(req.params.skip) || 0;
+        var sampleArray = JSON.parse(data);
+        sampleArray = sampleArray.slice(skip, skip + limit);
+        res.send(sampleArray);
+    });
+});
+
+app.get('/employees/:id', function(req, res) {
     fs.readFile(path.join(__dirname + '/public/json/sample.json'), 'utf8', function (err, data) {
         if (err) return res.status(500).send();
         var sampleArray = JSON.parse(data);
