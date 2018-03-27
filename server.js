@@ -50,6 +50,7 @@ app.get('/users/:id', function(req, res) {
 });
 
 app.post('/users/add', function(req, res) {
+
     fs.readFile(path.join(__dirname + '/public/json/credentials.json'), 'utf8', function (err, data) {
         if (err) return res.status(500).send();
         var user = req.body;
