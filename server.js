@@ -66,7 +66,7 @@ app.post('/users/add', function(req, res) {
                 res.status(200).send({message: 'User added successfully'});
             });
         }
-        return res.status(500).send({message: 'Please fill all fields'});
+        else return res.status(500).send({message: 'Please fill all fields'});
     });
 });
 
