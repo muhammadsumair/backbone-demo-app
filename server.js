@@ -56,6 +56,10 @@ app.post('/users/add', function(req, res) {
         var user = req.body;
         if(user.email && user.password && user.role) {
             var users = JSON.parse(data);
+            var exist = users.filter(function(data) {
+                return data.email === user.email;
+            })[0];
+            if(exist) return res.status(500).send({message: 'User already exist'});
             users.push({
                 email: user.email,
                 password: user.password,
@@ -69,6 +73,34 @@ app.post('/users/add', function(req, res) {
         }
         else return res.status(500).send({message: 'Please fill all fields'});
     });
+});
+
+app.post('/users/add/:email', function(req, res) {
+    if(req.params.email) {
+        fs.readFile(path.join(__dirname + '/public/json/credentials.json'), 'utf8', function (err, data) {
+            if (err) return res.status(500).send();
+            var users = JSON.parse(data);
+            var exist = false;
+            var user = req.body;
+            users = users.map(function(data) {
+                if(data.email === req.params.email) {
+                    exist = true;
+                    data.password = user.password;
+                    data.role = user.role;
+                }
+                return data;
+            });
+            if(exist) {
+                var json = JSON.stringify(users);
+                fs.writeFile(path.join(__dirname + '/public/json/credentials.json'), json, 'utf8', function (err, data) {
+                    if (err) return res.status(500).send();
+                    res.status(200).send({message: 'User updated successfully'});
+                });
+            }
+            else return res.status(404).send({message: 'User not found'});
+        });
+    }
+    else return res.status(500).send({message: 'Please enter email'});
 });
 
 app.get('/employees/all/:skip/:limit', function(req, res) {
