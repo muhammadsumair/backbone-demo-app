@@ -49,6 +49,27 @@ app.get('/users/:id', function(req, res) {
     });
 });
 
+app.post('/users/add', function(req, res) {
+    fs.readFile(path.join(__dirname + '/public/json/credentials.json'), 'utf8', function (err, data) {
+        if (err) return res.status(500).send();
+        var user = req.body;
+        if(user.email && user.password && user.role) {
+            var users = JSON.parse(data);
+            users.push({
+                email: user.email,
+                password: user.password,
+                role: user.role
+            });
+            var json = JSON.stringify(users);
+            fs.writeFile(path.join(__dirname + '/public/json/credentials.json'), json, 'utf8', function (err, data) {
+                if (err) return res.status(500).send();
+                res.status(200).send({message: 'User added successfully'});
+            });
+        }
+        return res.status(500).send({message: 'Please fill all fields'});
+    });
+});
+
 app.get('/employees/all/:skip/:limit', function(req, res) {
     fs.readFile(path.join(__dirname + '/public/json/sample.json'), 'utf8', function (err, data) {
         if (err) return res.status(500).send();
